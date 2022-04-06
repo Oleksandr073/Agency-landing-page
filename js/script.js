@@ -144,7 +144,7 @@ if (navLinks.length > 0) {
     navLinks.forEach(navLink => {
         navLink.addEventListener('click', function (event) {
             const navLink = event.target;
-            if (navLink.dataset.goto && document.querySelector(navLink.dataset.goto)) {
+            if (navLink.dataset.goto && document.querySelector(navLink.dataset.goto)) { // 0_o
                 const section = document.getElementsByClassName('section');
                 const gotoSection = document.querySelector(navLink.dataset.goto);
                 const gotoSectionValue = gotoSection.getBoundingClientRect().top + window.pageYOffset - parseInt(getComputedStyle(section[0]).paddingTop);
@@ -164,9 +164,8 @@ if (navLinks.length > 0) {
 
 const header = document.querySelector('.header');
 header.addEventListener('click', function (event) {
-    // if (!event.target.dataset.goto && event.target.className && !event.target.className.includes('burger')) {
-    if (!event.target.closest('.burger') && !event.target.closest('.nav')) {
-        if (nav.className.includes('_active')) {
+    if (!event.target.dataset.goto && event.target.className && !event.target.className.includes('burger')) {
+        if (burger && nav.className.includes('_active')) {
             burger.classList.remove('_active');
             nav.classList.remove('_active');
         }
@@ -187,11 +186,10 @@ if (burger) {
         burger.classList.toggle('_active');
         nav.classList.toggle('_active');
     });
+    document.addEventListener('click', function (event) {
+        if (nav.className.includes('_active') && !event.target.closest('.header')) {
+            burger.classList.remove('_active');
+            nav.classList.remove('_active');
+        }
+    });
 }
-
-document.addEventListener('click', function (event) {
-    if (nav.className.includes('_active') && !event.target.closest('.header')) {
-        burger.classList.remove('_active');
-        nav.classList.remove('_active');
-    }
-});
