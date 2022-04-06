@@ -114,12 +114,6 @@ teamItems.addEventListener("click", function (event) {
     }
 });
 
-let scrollWidth = Math.max(
-    document.body.scrollWidth, document.documentElement.scrollWidth,
-    document.body.offsetWidth, document.documentElement.offsetWidth,
-    document.body.clientWidth, document.documentElement.clientWidth
-);
-
 // fixHeader //
 window.onscroll = function fixHeader() {
     const header = document.querySelector('.header');
@@ -170,7 +164,12 @@ if (navLinks.length > 0) {
 
 const header = document.querySelector('.header');
 header.addEventListener('click', function (event) {
-    if (!event.target.dataset.goto && event.target.className && !event.target.className.includes('burger')) {        
+    // if (!event.target.dataset.goto && event.target.className && !event.target.className.includes('burger')) {
+    if (!event.target.closest('.burger') && !event.target.closest('.nav')) {
+        if (nav.className.includes('_active')) {
+            burger.classList.remove('_active');
+            nav.classList.remove('_active');
+        }
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -189,3 +188,10 @@ if (burger) {
         nav.classList.toggle('_active');
     });
 }
+
+document.addEventListener('click', function (event) {
+    if (nav.className.includes('_active') && !event.target.closest('.header')) {
+        burger.classList.remove('_active');
+        nav.classList.remove('_active');
+    }
+});
