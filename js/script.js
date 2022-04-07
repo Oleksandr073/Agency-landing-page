@@ -182,11 +182,11 @@ const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
 
 if (burger) {
-    burger.addEventListener('click', function (event) {
-        burger.classList.toggle('_active');
-        nav.classList.toggle('_active');
-    });
     document.addEventListener('click', function (event) {
+        if (event.target.closest('.burger')) {
+            burger.classList.toggle('_active');
+            nav.classList.toggle('_active');
+        }
         if (nav.className.includes('_active') && !event.target.closest('.header')) {
             burger.classList.remove('_active');
             nav.classList.remove('_active');
