@@ -140,20 +140,23 @@ window.onscroll = function fixHeader() {
 
 // nav //
 const navLinks = document.querySelectorAll('.nav_link[data-goto]');
-if (navLinks.length > 0) {
+if (navLinks.length > 0) { // 0_o
     navLinks.forEach(navLink => {
         navLink.addEventListener('click', function (event) {
             const navLink = event.target;
             if (navLink.dataset.goto && document.querySelector(navLink.dataset.goto)) { // 0_o
-                const section = document.getElementsByClassName('section');
-                const gotoSection = document.querySelector(navLink.dataset.goto);
-                const gotoSectionValue = gotoSection.getBoundingClientRect().top + window.pageYOffset - parseInt(getComputedStyle(section[0]).paddingTop);
-                const nav = document.querySelector('.nav')
-                nav.classList.toggle('_active');
+                const gotoSection = document.querySelector(navLink.dataset.goto).closest('section');
+                const gotoSectionValue = gotoSection.getBoundingClientRect().top + window.pageYOffset;
+
                 const burger = document.querySelector('.burger');
-                burger.classList.toggle('_active');
+                const nav = document.querySelector('.nav');
+                if (burger) {
+                    nav.classList.toggle('_active');
+                    burger.classList.toggle('_active');
+                }
+
                 window.scrollTo({
-                    top: gotoSectionValue,
+                    top: gotoSectionValue.toFixed(),
                     behavior: 'smooth',
                 });
                 event.preventDefault();
@@ -162,6 +165,38 @@ if (navLinks.length > 0) {
     });
 }
 
+// scroll => nav:hover //
+window.addEventListener('scroll', function (event) {
+
+    navLinks.forEach(navLink => {
+        navLink.classList.remove('_active');
+    });
+
+    for (let i = 0; i < navLinks.length; i++) {
+
+        let gotoSectionValue = 0;
+        if (i > 0) {
+            const gotoSection = document.querySelector(navLinks[i].dataset.goto).closest('.section');
+            gotoSectionValue = gotoSection.getBoundingClientRect().top + window.pageYOffset;
+        }
+
+        let gotoSectionNextValue = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+        if (i < navLinks.length - 1) {
+        const gotoSectionNext = document.querySelector(navLinks[i + 1].dataset.goto).closest('.section');
+        gotoSectionNextValue = gotoSectionNext.getBoundingClientRect().top + window.pageYOffset;     
+        }
+
+        if (scrollY >= gotoSectionValue.toFixed() && scrollY < gotoSectionNextValue.toFixed()) {
+            navLinks[i].classList.add('_active');
+        }
+    }
+});
+
+// header //
 const header = document.querySelector('.header');
 header.addEventListener('click', function (event) {
     if (!event.target.dataset.goto && event.target.className && !event.target.className.includes('burger')) {
