@@ -227,4 +227,10 @@ if (burger) {
             nav.classList.remove('_active');
         }
     });
+    document.addEventListener('touchstart', function (event) {
+        if (nav.className.includes('_active') && !event.target.closest('.header')) {
+            burger.classList.remove('_active');
+            nav.classList.remove('_active');
+        }
+    });
 }
