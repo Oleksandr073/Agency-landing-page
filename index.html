@@ -213,7 +213,7 @@
             <h2 class="videofon_title">Design tips, tricks, and freebies. Delivered weekly.</h2>
             <p class="videofon_subtitle">Lorem ipsum dolor sit amet, consectetur adipis cing elit, sed do eiusmod.</p>
             <form class="videofon_pole" action="#" method="get" name="email">
-                <input class="videofon_input input" type="email" name="adress" placeholder="Email Adress...">
+                <input required class="videofon_input input" type="email" name="adress" placeholder="Email Adress...">
                 <button class="btn trans" href="#" name="subscribe" value="clicked" type="submit">subscribe</button>
             </form>
         </div> <!-- container -->
@@ -236,9 +236,9 @@
             </div>
 
             <form class="contact_pole" action="#" method="get" name="info">
-                <input class="contact_input input" type="text" name="name" placeholder="Name">
-                <input class="contact_input input" type="email" name="adress" placeholder="Your Mail">
-                <textarea class="contact_input input msg" name="message" placeholder="Type your message"></textarea>
+                <input required class="contact_input input" type="text" name="name" placeholder="Name">
+                <input required class="contact_input input" type="email" name="adress" placeholder="Your Mail">
+                <textarea required class="contact_input input msg" name="message" placeholder="Type your message"></textarea>
                 <button class="btn" href="#" name="message" value="clicked" type="submit">send message</button>
             </form>
 

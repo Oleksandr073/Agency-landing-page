@@ -234,3 +234,15 @@ if (burger) {
         }
     });
 }
+
+// forms //
+window.addEventListener('beforeunload', function (event) {
+    for (let form of document.forms) {
+        for (let input of form) {
+            if (input.value && input.type != 'submit') {
+                event.preventDefault();
+                event.returnValue = '';
+            };
+        }
+    }
+});
