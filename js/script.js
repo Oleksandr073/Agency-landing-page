@@ -1,5 +1,5 @@
 // team info //
-const team = [
+const teamInfo = [
     {
         name: "Mark Waugh",
         id: 0,
@@ -63,6 +63,7 @@ const team = [
 ];
 
 // team //
+// const team = document.querySelector('.team');
 const teamPhoto = document.querySelector('.team_photo img');
 const teamTitle = document.querySelector('.team_title');
 const teamText = document.querySelector('.team_text');
@@ -71,48 +72,73 @@ const teamItem = document.querySelectorAll('.team_item');
 const teamItemImg = document.querySelectorAll('.team_item img');
 const teamName = document.querySelectorAll('.team_item .team_name');
 
-teammates();
-
-// window.addEventListener("load", function readyLoad() {
-//     teammates();
-// });
-
 function teammates(idx = 0) {
+
     let j = idx;
 
-    teamPhoto.id = team[idx].id.toString();
-    teamPhoto.setAttribute('src', team[idx].photo);
-    teamTitle.textContent = team[idx].name;
-    teamPhoto.setAttribute('alt', team[idx].name);
-    teamText.textContent = team[idx].text;
+    teamPhoto.id = teamInfo[idx].id.toString();
+    teamPhoto.setAttribute('src', teamInfo[idx].photo);
+    teamTitle.textContent = teamInfo[idx].name;
+    teamPhoto.setAttribute('alt', teamInfo[idx].name);
+    teamText.textContent = teamInfo[idx].text;
 
     for (let i = 0; i < socItem.length; i++) {
-        keys = Object.keys(team[idx].social);
-        socItem[i].setAttribute('href', team[idx].social[keys[i]]);
+        keys = Object.keys(teamInfo[idx].social);
+        socItem[i].setAttribute('href', teamInfo[idx].social[keys[i]]);
     }
 
     j = 0;
-    for (let i = 0; i < team.length - 1; i++) {
+    for (let i = 0; i < teamInfo.length - 1; i++) {
         if (j === idx) {
             j++;
             i--;
             continue;
         }
-        teamItem[i].id = team[j].id.toString();
-        teamItemImg[i].setAttribute('src', team[j].photo);
-        teamName[i].textContent = team[j].name;
-        teamItemImg[i].setAttribute('alt', team[j].name);
+        teamItem[i].id = teamInfo[j].id.toString();
+        teamItemImg[i].setAttribute('src', teamInfo[j].photo);
+        teamName[i].textContent = teamInfo[j].name;
+        teamItemImg[i].setAttribute('alt', teamInfo[j].name);
         j++;
     }
 }
 
+function teamActive(idx) {
+    teammates(idx);
+    document.querySelector('.team_ava').style.opacity = 1;
+    document.querySelector('.team_photo').style.opacity = 1;
+    document.querySelector('.team_mates').style.opacity = 1;
+
+    setTimeout(teamClick, 250);
+}
+
+// document.querySelector('.team_ava').classList.toggle('_active');
+// document.querySelector('.team_photo').classList.toggle('_active');
+// document.querySelector('.team_mates').classList.toggle('_active');
+
+teamActive();
+
+// window.addEventListener("load", function readyLoad() {
+//     teamActive();
+// });
+
 const teamItems = document.querySelector('.team_ava');
 
-teamItems.addEventListener("click", function (event) {
-    if (event.target.closest('.team_item')) {
-        teammates(Number(event.target.closest('.team_item').id));
-    }
-});
+// teamItems.addEventListener("click", function (event) {
+//     if (event.target.closest('.team_item')) {
+//         teammates(Number(event.target.closest('.team_item').id));
+//     }
+// });
+
+function teamClick() {
+    teamItems.addEventListener("click", function (event) {
+        if (event.target.closest('.team_item')) {
+            document.querySelector('.team_ava').style.opacity = 0;
+            document.querySelector('.team_photo').style.opacity = 0;
+            document.querySelector('.team_mates').style.opacity = 0;
+            setTimeout(teamActive, 250, Number(event.target.closest('.team_item').id))
+        }
+    }, { "once": true });
+}
 
 // fixHeader //
 window.onscroll = function fixHeader() {

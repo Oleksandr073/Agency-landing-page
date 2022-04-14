@@ -527,6 +527,22 @@ ul {
     grid-column-gap: 5%;
 }
 
+.team_photo,
+.team_mates,
+.team_ava {
+    opacity: 0;
+
+    transition: opacity .25s linear;
+}
+
+/*
+.team_photo._active,
+.team_mates._active,
+.team_ava._active {
+    opacity: 1;
+}
+*/
+
 .team_info {
     grid-column-start: span 2;
 
