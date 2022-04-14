@@ -20,6 +20,12 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 /* container */
 
 .container {
@@ -391,6 +397,10 @@ h1, h2, h3, h4, h5, h6, p {
     font-weight: 600;
     line-height: 1;
     opacity: .7;
+
+}
+
+.products_name a {
     color: inherit;
 
     text-transform: uppercase;
@@ -399,7 +409,7 @@ h1, h2, h3, h4, h5, h6, p {
     transition: color .2s ease-in;
 }
 
-.products_name:hover {
+.products_name a:hover {
     color: var(--red);
 
     transition: color .2s ease-out;
@@ -445,7 +455,6 @@ h1, h2, h3, h4, h5, h6, p {
 
     background-color: var(--red);
 }
-
 
 /* products/team collage*/
 
@@ -588,16 +597,19 @@ h1, h2, h3, h4, h5, h6, p {
 
     font-size: 1.125em;
     font-style: italic;
-    color: inherit;
-
-    text-decoration: none;
 }
 
 .soc_item:last-child {
     margin: 0;
 }
 
-.soc_item:hover {
+.soc_item a {
+    color: inherit;
+
+    text-decoration: none;
+}
+
+.soc_item a:hover {
     text-decoration: underline;
 }
 

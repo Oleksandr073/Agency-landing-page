@@ -66,7 +66,7 @@ const team = [
 const teamPhoto = document.querySelector('.team_photo img');
 const teamTitle = document.querySelector('.team_title');
 const teamText = document.querySelector('.team_text');
-const socItem = document.querySelectorAll('.soc_item');
+const socItem = document.querySelectorAll('.soc_item a');
 const teamItem = document.querySelectorAll('.team_item');
 const teamItemImg = document.querySelectorAll('.team_item img');
 const teamName = document.querySelectorAll('.team_item .team_name');
@@ -187,7 +187,7 @@ window.addEventListener('scroll', function (event) {
         );
         if (i < navLinks.length - 1) {
         const gotoSectionNext = document.querySelector(navLinks[i + 1].dataset.goto).closest('.section');
-        gotoSectionNextValue = gotoSectionNext.getBoundingClientRect().top + window.pageYOffset;     
+        gotoSectionNextValue = gotoSectionNext.getBoundingClientRect().top + window.pageYOffset;
         }
 
         if (scrollY >= gotoSectionValue.toFixed() && scrollY < gotoSectionNextValue.toFixed()) {
