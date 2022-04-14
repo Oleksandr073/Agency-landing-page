@@ -236,6 +236,8 @@ ul {
     text-transform: capitalize;
     text-decoration: none;
 
+    cursor: pointer; /* */
+
     border: 2px solid var(--red);
     border-radius: 7px;
     background-color: var(--red);
